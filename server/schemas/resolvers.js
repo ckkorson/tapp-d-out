@@ -2,13 +2,17 @@ const { User } = require('../models');
 
 const resolvers = {
   Query: {
-    me: async (parent, args, context) => {
+    user: async (parent, args, context) => {
       if (context.user){
-        const userData = await User.findOne({_id: context.user._id})
+        const user = await User.findById(context.user.id)
 
-        return userData
+        return user
       }
+      throw new AuthenticationError('Not logged in')
     }
+  },
+  Mutation: {
+    
   }
 };
 
