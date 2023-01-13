@@ -11,7 +11,8 @@ type User {
 }
 
 type Drink {
-  _Id: ID!
+  _id: ID!
+  drinkName: String
   description: String
   price: Int!
   quantity: Int
@@ -34,6 +35,38 @@ type Query {
 }
 
 type Mutation {
+  addUser(
+    name: String!
+    username: String!
+    email: String!
+    password: String!
+  ): AutH
+  addTab(drinks: [ID]!): Tab
+  addDrink(
+    description: String
+    price: Int!
+    quantity: Int
+    category: String
+  )
+  updateUser(
+    name: String!
+    username: String!
+    email: String!
+    password: String!
+  ): User
+  updateDrink(
+    _id: ID!
+    drinkName: String
+    description: String
+    price: Int!
+    quantity: Int
+    category: String
+  ): Drink
+
+  // deleteDrink(
+  //   ADD DELETE DRINK
+  // )
+
   login(email: String!, password: String!): Auth
   addUser(username: String!, email: String!, password: String!): Auth
   saveBook(authors: [String], bookId: String!, )
