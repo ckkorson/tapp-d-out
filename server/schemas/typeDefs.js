@@ -1,77 +1,57 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-type User {
-  _id: ID!
-  userType: String!
-  name: String!
-  username: String!
-  email: String!
-  tabs: [Tab]
-}
-
-type Drink {
-  _id: ID!
-  drinkName: String
-  description: String
-  price: Int!
-  quantity: Int
-  category: String
-}
-
-type Tab {
-  tabOwner: String
-  drinks: Int
-}
-
-type Auth {
-  token: ID!
-  user: User
-}
-
-type Query {
-    user: User
-    tab: (_id: ID!): Tab
-}
-
-type Mutation {
-  addUser(
+  type User {
+    _id: ID!
+    userType: String!
     name: String!
     username: String!
     email: String!
-    password: String!
-  ): AutH
-  addTab(drinks: [ID]!): Tab
-  addDrink(
-    description: String
-    price: Int!
-    quantity: Int
-    category: String
-  )
-  updateUser(
-    name: String!
-    username: String!
-    email: String!
-    password: String!
-  ): User
-  updateDrink(
+  }
+
+  type Drink {
     _id: ID!
     drinkName: String
     description: String
     price: Int!
     quantity: Int
     category: String
-  ): Drink
+  }
 
-  // deleteDrink(
-  //   ADD DELETE DRINK
-  // )
+  type Tab {
+    _id: ID!
+    tabOwner: String
+    drinks: Int
+  }
 
-  login(email: String!, password: String!): Auth
-  addUser(username: String!, email: String!, password: String!): Auth
-  saveBook(authors: [String], bookId: String!, )
-}
+  type Auth {
+    token: ID!
+    user: User
+  }
 
+  type Query {
+      user: User
+  }
+
+  type Mutation {
+    addUser(
+      name: String!
+      username: String!
+      email: String!
+      password: String!
+    ): Auth
+
+    addTab(drinks: [ID]!): Tab
+
+    updateUser(
+      name: String!
+      username: String!
+      email: String!
+      password: String!
+    ): User
+
+    login(username: String!, password: String!): Auth
+  }
 `;
 
 module.exports = typeDefs;
