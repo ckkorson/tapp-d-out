@@ -1,4 +1,5 @@
-const { User } = require('../models');
+const { User, Tab, Drink } = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -21,7 +22,7 @@ const resolvers = {
     addTab: async (parent, { products }, context) => {
       console.log(context);
       if (context.user) {
-        const order = new Order({ products });
+        const order = new Tab({ products });
 
         await User.findByIdAndUpdate(context.user.id, {
           $push: { orders: order },
@@ -41,8 +42,8 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
 
       if (!user) {
         throw new AuthenticationError('Incorrect credentials');
