@@ -1,16 +1,14 @@
 [
   {
-    "userType": "Vendor",
-    "name": "Xul Brewing",
-    "username": "xulbrew",
-    "email": "xul@email.com",
-    "password": "pass1234!"
+    "drinkName": "Bud Light",
+    "description": "American Light Lager",
+    "price": "5",
+    "category": "Beer"
   },
   {
-    "userType": "Patron",
-    "name": "Caleb",
-    "username": "calkor",
-    "email": "caleb@email.com",
-    "password": "pass1234!"
+    "drinkName": "Old Fashioned",
+    "description": "Whiskey, simple syrup, bitters",
+    "price": "10",
+    "category": "Mixed Drink"
   }
 ]
