@@ -26,7 +26,18 @@ const resolvers = {
         return drink
       }
       throw new AuthenticationError('Drink does not exist')
-    }
+    },
+    drinks: async (parent, { drinkName }) => {
+      const params = {};
+
+      if (drinkName) {
+        params.drinkName = {
+          $regex: drinkName,
+        };
+      }
+
+      return Drink.find(params).populate('drinkName');
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {
