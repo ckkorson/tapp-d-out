@@ -5,10 +5,10 @@ const { AuthenticationError } = require("apollo-server-express");
 const resolvers = {
   Query: {
     user: async (parent, args, context) => {
-      if (context.user){
-        const user = await User.findById(context.user.id)
+      if (context.user) {
+        const user = await User.findById(context.user.id);
 
-        return user
+        return user;
       }
       throw new AuthenticationError('Not logged in')
     },
@@ -27,7 +27,6 @@ const resolvers = {
       }
       throw new AuthenticationError('Drink does not exist')
     }
-      
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -53,7 +52,7 @@ const resolvers = {
         return order;
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
@@ -62,19 +61,19 @@ const resolvers = {
         });
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
     login: async (parent, { username, password }) => {
       const user = await User.findOne({ username });
 
       if (!user) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const token = signToken(user);

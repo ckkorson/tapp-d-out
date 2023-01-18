@@ -52,10 +52,10 @@ const typeDefs = gql`
     addTab(drinks: [ID]!): Tab
 
     updateUser(
-      name: String!
-      username: String!
-      email: String!
-      password: String!
+      name: String
+      username: String
+      email: String
+      password: String
     ): User
 
     login(username: String!, password: String!): Auth
