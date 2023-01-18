@@ -13,15 +13,14 @@ const typeDefs = gql`
     _id: ID!
     drinkName: String
     description: String
-    price: Int!
-    quantity: Int
+    price: Int
     category: String
   }
 
   type Tab {
     _id: ID!
-    tabOwner: String
-    drinks: Int
+    tabDate: String
+    drinks: [Drink]
   }
 
   type Auth {
@@ -31,6 +30,7 @@ const typeDefs = gql`
 
   type Query {
       user: User
+      drink(_id: ID!): Drink
   }
 
   type Mutation {
@@ -41,6 +41,13 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): Auth
+
+    addDrink(
+      drinkName: String!
+      description: String
+      price: Int!
+      category: String
+    ): Drink
 
     addTab(drinks: [ID]!): Tab
 

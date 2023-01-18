@@ -1,13 +1,9 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const tabSchema = new Schema({
-  purchaseDate: {
+  tabDate: {
     type: Date,
     default: Date.now
-  },
-  tabOwner: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
   },
   drinks: [
     {
