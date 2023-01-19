@@ -1,5 +1,5 @@
-const { User, Tab, Drink } = require('../models');
-const { signToken } = require('../utils/auth');
+const { User, Tab, Drink } = require("../models");
+const { signToken } = require("../utils/auth");
 const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
@@ -10,7 +10,7 @@ const resolvers = {
 
         return user;
       }
-      throw new AuthenticationError('Not logged in')
+      throw new AuthenticationError("Not logged in");
     },
     // drink: async (parent, { id }, context) => {
     //   if (context.drink){
@@ -21,11 +21,11 @@ const resolvers = {
     //   throw new AuthenticationError('Drink does not exist')
     // }
     drink: async (parent, { _id }) => {
-      const drink = await Drink.findById(_id)
+      const drink = await Drink.findById(_id);
       if (drink) {
-        return drink
+        return drink;
       }
-      throw new AuthenticationError('Drink does not exist')
+      throw new AuthenticationError("Drink does not exist");
     },
     drinks: async (parent, { drinkName }) => {
       const params = {};
@@ -36,7 +36,7 @@ const resolvers = {
         };
       }
 
-      return Drink.find(params).populate('drinkName');
+      return Drink.find(params).populate("drinkName");
     },
   },
   Mutation: {
@@ -46,25 +46,40 @@ const resolvers = {
 
       return { token, user };
     },
-    addDrink: async (parent, args) => {
-      const drink = await Drink.create(args);
+    addDrink: async (
+      parent,
+      { drinkName, description, price, category, tabId }
+    ) => {
+      const drink = await Drink.create({
+        drinkName,
+        description,
+        price,
+        category,
+      });
+
+      await Tab.findByIdAndUpdate(
+        { _id: tabId },
+        {
+          $push: { tabs: tab._id },
+        }
+      );
 
       return { drink };
     },
-    addTab: async (parent, { products }, context) => {
-      console.log(context);
-      if (context.user) {
-        const order = new Tab({ products });
+    // addTab: async (parent, { products }, context) => {
+    //   console.log(context);
+    //   if (context.user) {
+    //     const order = new Tab({ products });
 
-        await User.findByIdAndUpdate(context.user.id, {
-          $push: { orders: order },
-        });
+    //     await User.findByIdAndUpdate(context.user.id, {
+    //       $push: { orders: order },
+    //     });
 
-        return order;
-      }
+    //     return order;
+    //   }
 
-      throw new AuthenticationError("Not logged in");
-    },
+    //   throw new AuthenticationError("Not logged in");
+    // },
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return User.findByIdAndUpdate(context.user.id, args, {
@@ -94,18 +109,18 @@ const resolvers = {
     addTab: async (parent, { drinks }, context) => {
       console.log(context);
       if (context.user) {
-        const tab = new Tab({ drinks });
+        const tab = Tab.create({ drinks });
 
         await User.findByIdAndUpdate(context.user.id, {
-          $push: { tabs: tab },
+          $push: { tabs: tab._id },
         });
 
-        return order;
+        return tab;
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
-  }
+  },
 };
 
 module.exports = resolvers;
