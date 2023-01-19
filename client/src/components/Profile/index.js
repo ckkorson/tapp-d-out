@@ -10,6 +10,7 @@ import {
   MDBBtn,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import Card from "react-bootstrap/Card";
 
 export default function Profile() {
   return (
@@ -42,8 +43,8 @@ export default function Profile() {
                   </MDBBtn>
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
-                  <MDBTypography tag="h5">Andy Horwitz</MDBTypography>
-                  <MDBCardText>New York</MDBCardText>
+                  <MDBTypography tag="h5">User Name</MDBTypography>
+                  <MDBCardText>Home Town</MDBCardText>
                 </div>
               </div>
               <div
@@ -52,19 +53,21 @@ export default function Profile() {
               >
                 <div className="d-flex justify-content-end text-center py-1">
                   <div>
-                    <MDBCardText className="mb-1 h5">253</MDBCardText>
+                    <MDBCardText className="mb-1 h5"># total tabs</MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Previous Tabs
                     </MDBCardText>
                   </div>
                   <div className="px-3">
-                    <MDBCardText className="mb-1 h5">1026</MDBCardText>
+                    <MDBCardText className="mb-1 h5">
+                      # bars visited
+                    </MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Bars Visited
                     </MDBCardText>
                   </div>
                   <div>
-                    <MDBCardText className="mb-1 h5">478</MDBCardText>
+                    <MDBCardText className="mb-1 h5"># Epic Nights</MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Epic Nights
                     </MDBCardText>
@@ -100,35 +103,54 @@ export default function Profile() {
                 </div>
                 <MDBRow>
                   <MDBCol className="mb-2">
-                    <MDBCard
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                      alt="image 1"
-                      className="w-100 rounded-3"
-                    />
-                    <h1>Drinking Night</h1>
+                    <Card style={{ width: "18rem" }}>
+                      <Card.Body>
+                        <Card.Title>Tab Date</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          Tab Location
+                        </Card.Subtitle>
+                        <Card.Text>Tab Details</Card.Text>
+                        <Card.Link href="#">View Whole Tab</Card.Link>
+                      </Card.Body>
+                    </Card>
                   </MDBCol>
                   <MDBCol className="mb-2">
-                    <MDBCardImage
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                      alt="image 1"
-                      className="w-100 rounded-3"
-                    />
+                    <Card style={{ width: "18rem" }}>
+                      <Card.Body>
+                        <Card.Title>Tab Date</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          Tab Location
+                        </Card.Subtitle>
+                        <Card.Text>Tab Details</Card.Text>
+                        <Card.Link href="#">View Whole Tab</Card.Link>
+                      </Card.Body>
+                    </Card>
                   </MDBCol>
                 </MDBRow>
                 <MDBRow className="g-2">
                   <MDBCol className="mb-2">
-                    <MDBCardImage
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                      alt="image 1"
-                      className="w-100 rounded-3"
-                    />
+                    <Card style={{ width: "18rem" }}>
+                      <Card.Body>
+                        <Card.Title>Tab Date</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          Tab Location
+                        </Card.Subtitle>
+                        <Card.Text>Tab Details</Card.Text>
+                        <Card.Link href="#">View Whole Tab</Card.Link>
+                      </Card.Body>
+                    </Card>
                   </MDBCol>
                   <MDBCol className="mb-2">
-                    <MDBCardImage
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                      alt="image 1"
-                      className="w-100 rounded-3"
-                    />
+                    <Card style={{ width: "18rem" }}>
+                      <Card.Body>
+                        <Card.Title>Tab Date</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          Tab Location
+                        </Card.Subtitle>
+                        <Card.Text>Tab Details</Card.Text>
+                        <Card.Link href="#">View Whole Tab</Card.Link>
+                      </Card.Body>
+                    </Card>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
