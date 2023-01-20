@@ -1,90 +1,50 @@
-import React, { useState, useEffect } from "react";
+import React from 'react';
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBIcon,
+  MDBInput
+}
+from 'mdb-react-ui-kit';
 
-const Form = () => {
-  const intialValues = { email: "", password: "" };
-
-  const [formValues, setFormValues] = useState(intialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const submit = () => {
-    console.log(formValues);
-  };
-
-  //input change handler
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  //form submission handler
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmitting(true);
-  };
-
-  //form validation handler
-  const validate = (values) => {
-    let errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-
-    if (!values.email) {
-      errors.email = "Cannot be blank";
-    } else if (!regex.test(values.email)) {
-      errors.email = "Invalid email format";
-    }
-
-    if (!values.password) {
-      errors.password = "Cannot be blank";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters";
-    }
-
-    return errors;
-  };
-
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmitting) {
-      submit();
-    }
-  }, [formErrors]);
-
+function Login() {
   return (
-    <div>
-      <h1>Sign in to continue</h1>
-      {Object.keys(formErrors).length === 0 && isSubmitting && (
-        <span>Form submitted successfully</span>
-      )}
-      <form onSubmit={handleSubmit} noValidate>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={formValues.email}
-            onChange={handleChange}
-          />
-          {formErrors.email && <span>{formErrors.email}</span>}
-        </div>
+    <MDBContainer fluid>
+      <MDBRow>
 
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={formValues.password}
-            onChange={handleChange}
-          />
-          {formErrors.password && <span>{formErrors.password}</span>}
-        </div>
+        <MDBCol sm='6'>
 
-        <button type="submit">Sign In</button>
-      </form>
-    </div>
+          <div className='d-flex flex-row ps-5 pt-5'>
+            <MDBIcon fas icon="crow fa-3x me-3" style={{ color: '#709085' }}/>
+            <span className="h1 fw-bold mb-0">Tapp-D-Out</span>
+          </div>
+
+          <div className='d-flex flex-column justify-content-center h-custom-2 w-75 pt-4'>
+
+            <h3 className="fw-normal mb-3 ps-5 pb-3" style={{letterSpacing: '1px'}}>Log in</h3>
+
+            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Email address' id='formControlLg' type='email' size="lg"/>
+            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Password' id='formControlLg' type='password' size="lg"/>
+
+            <MDBBtn className="mb-4 px-5 mx-5 w-100" color='info' size='lg'>Login</MDBBtn>
+            <p className="small mb-5 pb-lg-3 ms-5"><a class="text-muted" href="#!">Forgot password?</a></p>
+            <p className='ms-5'>Don't have an account? <a href="#!" class="link-info">Register here</a></p>
+
+          </div>
+
+        </MDBCol>
+
+        <MDBCol sm='6' className='d-none d-sm-block px-0'>
+          <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2015%2F12%2F16035__oldschool_l_0.jpg"
+            alt="Login rightside" className="w-100" style={{objectFit: 'cover', objectPosition: 'left'}} />
+        </MDBCol>
+
+      </MDBRow>
+
+    </MDBContainer>
   );
-};
+}
 
-export default Form;
+export default Login;

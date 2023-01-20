@@ -1,94 +1,50 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../utils/mutations";
+import React from 'react';
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBIcon,
+  MDBInput
+}
+from 'mdb-react-ui-kit';
 
-import Auth from "../utils/auth";
-
-const Login = (props) => {
-  const [formState, setFormState] = useState({ email: "", password: "" });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
-
-  // update state based on form input changes
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
-
-  // submit form
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    console.log(formState);
-    try {
-      const { data } = await login({
-        variables: { ...formState },
-      });
-
-      Auth.login(data.login.token);
-    } catch (e) {
-      console.error(e);
-    }
-
-    // clear form values
-    setFormState({
-      email: "",
-      password: "",
-    });
-  };
-
+function Login() {
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{" "}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: "pointer" }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
+    <MDBContainer fluid>
+      <MDBRow>
 
-            {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
+        <MDBCol sm='6'>
+
+          <div className='d-flex flex-row ps-5 pt-5'>
+            <MDBIcon fas icon="crow fa-3x me-3" style={{ color: '#709085' }}/>
+            <span className="h1 fw-bold mb-0">Tapp-D-Out</span>
           </div>
-        </div>
-      </div>
-    </main>
+
+          <div className='d-flex flex-column justify-content-center h-custom-2 w-75 pt-4'>
+
+            <h3 className="fw-normal mb-3 ps-5 pb-3" style={{letterSpacing: '1px'}}>Log in</h3>
+
+            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Email address' id='formControlLg' type='email' size="lg"/>
+            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Password' id='formControlLg' type='password' size="lg"/>
+
+            <MDBBtn className="mb-4 px-5 mx-5 w-100" color='info' size='lg'>Login</MDBBtn>
+            <p className="small mb-5 pb-lg-3 ms-5"><a class="text-muted" href="#!">Forgot password?</a></p>
+            <p className='ms-5'>Don't have an account? <a href="#!" class="link-info">Register here</a></p>
+
+          </div>
+
+        </MDBCol>
+
+        <MDBCol sm='6' className='d-none d-sm-block px-0'>
+          <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2015%2F12%2F16035__oldschool_l_0.jpg"
+            alt="Login rightside" className="w-100" style={{objectFit: 'cover', objectPosition: 'left'}} />
+        </MDBCol>
+
+      </MDBRow>
+
+    </MDBContainer>
   );
-};
+}
 
 export default Login;
