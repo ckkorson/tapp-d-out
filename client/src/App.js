@@ -1,46 +1,66 @@
-import React, { useState } from "react";
+import React from "react";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/index";
-// import Footer from "./components/Footer/index";
-import Profile from "./components/Profile/index";
-import Login from "./components/Login/index";
-import Createacct from "./components/Createacct/index";
-import Landing from "./components/Landing/index";
-import Newtab from "./components/Newtab/index";
+import Footer from "./components/Footer/index";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import Signup from "./pages/signup";
+import Newtab from "./pages/Newtab";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-function App() {
-  const [currentPage, setCurrentPage] = useState("Landing");
+// Construct our main GraphQL API endpoint
+const httpLink = createHttpLink({
+  uri: "/graphql",
+});
 
-  // This method is checking to see what the value of `currentPage` is. Depending on the value of currentPage, we return the corresponding component to render.
-  const renderPage = () => {
-    if (currentPage === "Landing") {
-      return <Landing />;
-    }
-    if (currentPage === "Login") {
-      return <Login />;
-    }
-    if (currentPage === "Createacct") {
-      return <Createacct />;
-    }
-    if (currentPage === "Profile") {
-      return <Profile />;
-    }
-    if (currentPage === "Newtab") {
-      return <Newtab />;
-    }
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem("id_token");
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
   };
+});
 
-  const handlePageChange = (page) => setCurrentPage(page);
+const client = new ApolloClient({
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
+function App() {
   return (
-    <div className="App">
-      <Header handlePageChange={handlePageChange} />
-
-      {renderPage()}
-
-      {/* <Footer /> */}
-    </div>
+    <ApolloProvider client={client}>
+      <Router>
+        <div className="flex-column justify-flex-start min-100-vh">
+          <Header />
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/me" element={<Profile />} />
+              <Route path="/profiles/:username" element={<Profile />} />
+              <Route path="/newtab" element={<Newtab />} />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+      </Router>
+    </ApolloProvider>
   );
 }
+
 export default App;
