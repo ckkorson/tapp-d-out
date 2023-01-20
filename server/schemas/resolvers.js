@@ -60,11 +60,11 @@ const resolvers = {
       await Tab.findByIdAndUpdate(
         { _id: tabId },
         {
-          $push: { tabs: tab._id },
+          $push: { drinks: drink._id },
         }
       );
 
-      return { drink };
+      return drink;
     },
     // addTab: async (parent, { products }, context) => {
     //   console.log(context);

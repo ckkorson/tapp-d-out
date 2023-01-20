@@ -29,9 +29,9 @@ const typeDefs = gql`
   }
 
   type Query {
-      user: User
-      drink(_id: ID!): Drink
-      drinks(drinkName: String): [Drink]
+    user: User
+    drink(_id: ID!): Drink
+    drinks(drinkName: String): [Drink]
   }
 
   type Mutation {
@@ -48,6 +48,7 @@ const typeDefs = gql`
       description: String
       price: Int!
       category: String
+      tabId: ID
     ): Drink
 
     addTab(drinks: [ID]!): Tab
