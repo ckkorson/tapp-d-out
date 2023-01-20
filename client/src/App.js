@@ -7,7 +7,7 @@ import Createacct from "./components/Createacct/index";
 import Landing from "./components/Landing/index";
 import Newtab from "./components/Newtab/index";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 function App() {
