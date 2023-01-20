@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -8,16 +9,10 @@ function Header({ handlePageChange }) {
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand onClick={() => handlePageChange("Profile")}>
-            Tapp-D-Out
-          </Navbar.Brand>
+          <Navbar.Brand to="/me">Tapp-D-Out</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link onClick={() => handlePageChange("Profile")}>
-              Profile
-            </Nav.Link>
-            <Nav.Link onClick={() => handlePageChange("Newtab")}>
-              Create New Tab
-            </Nav.Link>
+            <Link to="/me">Profile</Link>
+            <Link to="/newtab">Create New Tab</Link>
           </Nav>
         </Container>
       </Navbar>
