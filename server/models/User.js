@@ -4,10 +4,6 @@ const Tab = require("./Tab");
 
 const userSchema = new Schema(
   {
-    userType: {
-      type: String,
-      required: true,
-    },
     name: {
       type: String,
       required: true,
