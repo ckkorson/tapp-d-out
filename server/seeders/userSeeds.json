@@ -1,13 +1,11 @@
 [
   {
-    "userType": "Vendor",
     "name": "Xul Brewing",
     "username": "xulbrew",
     "email": "xul@email.com",
     "password": "pass1234!"
   },
   {
-    "userType": "Patron",
     "name": "Caleb",
     "username": "calkor",
     "email": "caleb@email.com",
