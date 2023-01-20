@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import { LOGIN } from '../utils/mutations';
-import Auth from '../utils/auth';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Link } from "react-router-dom";
+import { LOGIN } from "../utils/mutations";
+import Auth from "../utils/auth";
 import {
   MDBBtn,
   MDBContainer,
@@ -12,28 +12,39 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 
-function Login(props) {
-  const [formState, setFormState] = useState({ username: '', password: '' });
+const Login = (props) => {
+  const [formState, setFormState] = useState({ username: "", password: "" });
   const [login, { error }] = useMutation(LOGIN);
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const mutationResponse = await login({
-        variables: { username: formState.username, password: formState.password },
-      });
-      const token = mutationResponse.data.login.token;
-      Auth.login(token);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
+  // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
+
     setFormState({
       ...formState,
       [name]: value,
+    });
+  };
+  console.log(formState);
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+    try {
+      const { data } = await login({
+        variables: { ...formState },
+      });
+      console.log(data);
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+    console.log(error);
+    console.log("++++++");
+    // clear form values
+    setFormState({
+      username: "",
+      password: "",
     });
   };
   return (
@@ -45,7 +56,10 @@ function Login(props) {
             <span className="h1 fw-bold mb-0">Tapp-D-Out</span>
           </div>
 
-          <div className="d-flex flex-column justify-content-center h-custom-2 w-75 pt-4">
+          <form
+            onSubmit={handleFormSubmit}
+            className="d-flex flex-column justify-content-center h-custom-2 w-75 pt-4"
+          >
             <h3
               className="fw-normal mb-3 ps-5 pb-3"
               style={{ letterSpacing: "1px" }}
@@ -58,17 +72,28 @@ function Login(props) {
               label="Username"
               id="formControlLg"
               type="name"
+              name="username"
               size="lg"
+              value={formState.username}
+              onChange={handleChange}
             />
             <MDBInput
               wrapperClass="mb-4 mx-5 w-100"
               label="Password"
               id="formControlLg"
               type="password"
+              name="password"
               size="lg"
+              value={formState.password}
+              onChange={handleChange}
             />
 
-            <MDBBtn className="mb-4 px-5 mx-5 w-100" color="info" size="lg">
+            <MDBBtn
+              to="/me"
+              className="mb-4 px-5 mx-5 w-100"
+              color="info"
+              size="lg"
+            >
               Login
             </MDBBtn>
             <p className="small mb-5 pb-lg-3 ms-5">
@@ -78,11 +103,11 @@ function Login(props) {
             </p>
             <p className="ms-5">
               Don't have an account?{" "}
-              <a href="#!" class="link-info">
+              <Link to="/signup" className="link-info">
                 Register here
-              </a>
+              </Link>
             </p>
-          </div>
+          </form>
         </MDBCol>
 
         <MDBCol sm="6" className="d-none d-sm-block px-0">
@@ -96,6 +121,6 @@ function Login(props) {
       </MDBRow>
     </MDBContainer>
   );
-}
+};
 
 export default Login;
