@@ -21,24 +21,24 @@ const resolvers = {
     //   }
     //   throw new AuthenticationError('Drink does not exist')
     // }
-    drink: async (parent, { _id }) => {
-      const drink = await Drink.findById(_id);
-      if (drink) {
-        return drink;
-      }
-      throw new AuthenticationError("Drink does not exist");
-    },
-    drinks: async (parent, { drinkName }) => {
-      const params = {};
+    // drink: async (parent, { _id }) => {
+    //   const drink = await Drink.findById(_id);
+    //   if (drink) {
+    //     return drink;
+    //   }
+    //   throw new AuthenticationError("Drink does not exist");
+    // },
+    // drinks: async (parent, { drinkName }) => {
+    //   const params = {};
 
-      if (drinkName) {
-        params.drinkName = {
-          $regex: drinkName,
-        };
-      }
+    //   if (drinkName) {
+    //     params.drinkName = {
+    //       $regex: drinkName,
+    //     };
+    //   }
 
-      return Drink.find(params).populate("drinkName");
-    },
+    //   return Drink.find(params).populate("drinkName");
+    // },
   },
   Mutation: {
     addUser: async (parent, args) => {
