@@ -1,10 +1,10 @@
 import React from "react";
-import { Navigate, useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Navigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { useQuery } from '@apollo/client';
-import { QUERY_ME } from '../utils/queries';
-import Auth from '../utils/auth';
+import { useQuery } from "@apollo/client";
+import { QUERY_ME } from "../utils/queries";
+import Auth from "../utils/auth";
 import {
   MDBCol,
   MDBContainer,
@@ -22,7 +22,7 @@ function Profile() {
   // const { username: userParam } = useParams();
   const { data } = useQuery(QUERY_ME);
   const user = data?.me || data?.user || {};
-  console.log(user)
+  console.log(user);
 
   // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
   //   return <Navigate to="/me" />;
@@ -62,7 +62,7 @@ function Profile() {
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
                   <MDBTypography tag="h5">{user.username}</MDBTypography>
-                  <MDBCardText>Home Town</MDBCardText>
+                  <MDBCardText>{user.email}</MDBCardText>
                 </div>
               </div>
               <div

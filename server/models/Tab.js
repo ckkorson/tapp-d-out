@@ -1,16 +1,46 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const dateFormat = require("../utils/dateFormat");
+
 const tabSchema = new Schema({
-  tabDate: {
+  description: {
+    type: String,
+    required: "What kind of drinking are we doing tonight?",
+    minlength: 1,
+    maxlength: 280,
+    trim: true,
+  },
+  location: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
   },
   drinks: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Drink'
-    }
-  ]
+      description: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 280,
+      },
+      Price: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      },
+    },
+  ],
 });
-const Tab = mongoose.model('Tab', tabSchema);
+
+const Tab = model("Tab", tabSchema);
+
 module.exports = Tab;

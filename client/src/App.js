@@ -53,7 +53,7 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route path="/me" element={<Profile />} />
               <Route path="/profiles/:username" element={<Profile />} />
-              {/* <Route path="/newtab" element={<Newtab />} /> */}
+              <Route path="/newtab" element={<Newtab />} />
             </Routes>
           </div>
           <Footer />
