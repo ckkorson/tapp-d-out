@@ -1,4 +1,10 @@
 import React from "react";
+import { Navigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { useQuery } from '@apollo/client';
+import { QUERY_ME } from '../utils/queries';
+import Auth from '../utils/auth';
 import {
   MDBCol,
   MDBContainer,
@@ -12,7 +18,19 @@ import {
 } from "mdb-react-ui-kit";
 import Card from "react-bootstrap/Card";
 
-export default function Profile() {
+function Profile() {
+  // const { username: userParam } = useParams();
+  const { data } = useQuery(QUERY_ME);
+  const user = data?.me || data?.user || {};
+  console.log(user)
+
+  // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+  //   return <Navigate to="/me" />;
+  // }
+
+  // if (data) {
+  //   user = data.user;
+  // }
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "#999" }}>
       <MDBContainer className="py-5 h-100">
@@ -43,7 +61,7 @@ export default function Profile() {
                   </MDBBtn>
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
-                  <MDBTypography tag="h5">User Name</MDBTypography>
+                  <MDBTypography tag="h5">{user.username}</MDBTypography>
                   <MDBCardText>Home Town</MDBCardText>
                 </div>
               </div>
@@ -161,3 +179,5 @@ export default function Profile() {
     </div>
   );
 }
+
+export default Profile;

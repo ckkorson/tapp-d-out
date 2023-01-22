@@ -25,27 +25,18 @@ const Login = (props) => {
       [name]: value,
     });
   };
-  console.log(formState);
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
     try {
-      const { data } = await login({
-        variables: { ...formState },
+      const mutationResponse = await login({
+        variables: { username: formState.username, password: formState.password },
       });
-      console.log(data);
-      Auth.login(data.login.token);
+      const token = mutationResponse.data.login.token;
+      Auth.login(token);
     } catch (e) {
       console.error(e);
     }
-    console.log(error);
-    console.log("++++++");
-    // clear form values
-    setFormState({
-      username: "",
-      password: "",
-    });
   };
   return (
     <MDBContainer fluid>
@@ -74,7 +65,7 @@ const Login = (props) => {
               type="name"
               name="username"
               size="lg"
-              value={formState.username}
+              // value={formState.username}
               onChange={handleChange}
             />
             <MDBInput
@@ -84,7 +75,7 @@ const Login = (props) => {
               type="password"
               name="password"
               size="lg"
-              value={formState.password}
+              // value={formState.password}
               onChange={handleChange}
             />
 
