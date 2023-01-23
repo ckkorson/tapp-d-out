@@ -40,6 +40,7 @@ export const ADD_TAB = gql`
       _id
       description
       location
+      tabOwner
       createdAt
       drinks {
         _id
@@ -56,6 +57,7 @@ export const ADD_DRINK = gql`
       _id
       description
       location
+      tabOwner
       createdAt
       drinks {
         _id

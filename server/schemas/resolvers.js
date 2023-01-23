@@ -5,17 +5,23 @@ const { AuthenticationError } = require("apollo-server-express");
 const resolvers = {
   Query: {
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('tabs');
+      return User.findOne({ username }).populate("tabs");
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('tabs');
+        return User.findOne({ _id: context.user._id }).populate("tabs");
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
-    tabs: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Tab.find(params).sort({ createdAt: -1 });
+    tabs: async (parent, args, context) => {
+      if (context.user) {
+        const tabs = await Tab.find({ tabOwner: context.user.username }).sort({
+          createdAt: -1,
+        });
+        console.log("THESE ARE THE TABS");
+        console.log(tabs);
+        return tabs;
+      }
     },
     // drink: async (parent, { id }, context) => {
     //   if (context.drink){
@@ -66,7 +72,7 @@ const resolvers = {
           }
         );
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
     // addDrink: async (
     //   parent,
@@ -129,7 +135,7 @@ const resolvers = {
       return { token, user };
     },
     addTab: async (parent, { description, location }, context) => {
-      console.log(context);
+      // console.log(context);
       if (context.user) {
         const tab = await Tab.create({
           description,

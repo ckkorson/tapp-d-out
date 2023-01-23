@@ -20,11 +20,16 @@ const Profilepic = require("../resources/images/profile.jpg");
 
 function Profile() {
   // const { username: userParam } = useParams();
-  const { data } = useQuery(QUERY_ME, QUERY_SINGLE_TAB);
+  const { data } = useQuery(QUERY_ME);
+  const { tabData } = useQuery(QUERY_SINGLE_TAB);
+  const { allTabs } = useQuery(QUERY_TABS);
+  console.log(allTabs);
   const user = data?.me || data?.user || {};
-  const tab = data?.tab || {};
+  const tab = tabData?.tab || {};
+  const tabs = allTabs?.tabs || [];
   console.log(user);
-  console.log(tab);
+  console.log(tabData);
+  console.log(tabs);
 
   // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
   //   return <Navigate to="/me" />;
@@ -84,12 +89,13 @@ function Profile() {
               <MDBCardBody className="text-black p-4">
                 <div className="mb-5">
                   <p className="lead fw-normal mb-1">
-                    {tab.description}TYPE OF DRINKING at THIS LOCATION
+                    {tab.description} at
                     {tab.location}
                   </p>
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     <MDBCardText className="font-italic mb-1">
-                      DRINK for $AMOUNT
+                      {/* {tab[0].drinks[0].description[0]} */}for
+                      {/* {tab[0].drinks[0].price[0]} */}
                     </MDBCardText>
                   </div>
                 </div>

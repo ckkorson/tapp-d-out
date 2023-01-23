@@ -26,6 +26,7 @@ export const QUERY_TABS = gql`
     tabs {
       _id
       description
+      tabOwner
       location
       createdAt
     }
