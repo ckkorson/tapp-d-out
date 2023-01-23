@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
   query user($username: String!) {
@@ -21,14 +21,42 @@ export const QUERY_ME = gql`
   }
 `;
 
-export const QUERY_DRINKS = gql `
-    {
-        drinks(drinkName: "Bud Light") {
-            _id
-            category
-            description
-            drinkName
-            price
-        }
+export const QUERY_TABS = gql`
+  query getTabs {
+    tabs {
+      _id
+      description
+      location
+      createdAt
     }
-`
+  }
+`;
+
+export const QUERY_SINGLE_TAB = gql`
+  query getSingleTab($tabId: ID!) {
+    tab(tabId: $tabId) {
+      _id
+      description
+      location
+      createdAt
+      drinks {
+        _id
+        description
+        price
+        createdAt
+      }
+    }
+  }
+`;
+
+export const QUERY_DRINKS = gql`
+  {
+    drinks(drinkName: "Bud Light") {
+      _id
+      category
+      description
+      drinkName
+      price
+    }
+  }
+`;

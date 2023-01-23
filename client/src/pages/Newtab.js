@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { Link } from "react-router-dom";
-import { ADD_TAB } from "../utils/mutations";
-import Auth from "../utils/auth";
+
 import {
   MDBBtn,
   MDBContainer,
@@ -12,28 +9,17 @@ import {
 } from "mdb-react-ui-kit";
 
 const Newtab = (props) => {
-  const [formState, setFormState] = useState({ description: "", location: "" });
-  const [addTab] = useMutation(ADD_TAB);
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const mutationResponse = await addTab({
-      variables: {
-        description: formState.description,
-        location: formState.location,
-      },
-    });
-    const token = mutationResponse.data.addTab.token;
-    Auth.login(token);
-  };
+  const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
-    const { tabData, value } = event.target;
-    setFormState({
-      ...formState,
-      [tabData]: value,
-    });
-    console.log(tabData);
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert(inputs);
   };
   return (
     <MDBContainer
@@ -48,7 +34,7 @@ const Newtab = (props) => {
       <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
         <MDBCardBody className="px-5">
           <h2 className="text-uppercase text-center mb-5">Create a New Tab</h2>
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={handleSubmit}>
             <MDBInput
               wrapperClass="mb-4"
               label="Description"
@@ -56,7 +42,7 @@ const Newtab = (props) => {
               id="form1"
               name="description"
               type="text"
-              // value={formState.name}
+              value={inputs.description || ""}
               onChange={handleChange}
             />
             <MDBInput
@@ -66,10 +52,10 @@ const Newtab = (props) => {
               id="form1"
               name="location"
               type="text"
-              // value={formState.username}
+              value={inputs.location || ""}
               onChange={handleChange}
             />
-            <MDBBtn to="/me" className="mb-4 w-100 gradient-custom-4" size="lg">
+            <MDBBtn to="/me" className="mb-4 w-100 blue" size="lg">
               Lets Go Drinking!
             </MDBBtn>
           </form>
