@@ -16,7 +16,7 @@ import {
   MDBBtn,
   MDBTypography,
 } from "mdb-react-ui-kit";
-import Card from "react-bootstrap/Card";
+const Profilepic = require("../resources/images/profile.jpg");
 
 function Profile() {
   // const { username: userParam } = useParams();
@@ -24,6 +24,7 @@ function Profile() {
   const user = data?.me || data?.user || {};
   const tab = data?.tab || {};
   console.log(user);
+  console.log(tab);
 
   // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
   //   return <Navigate to="/me" />;
@@ -47,19 +48,12 @@ function Profile() {
                   style={{ width: "150px" }}
                 >
                   <MDBCardImage
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                    alt="Generic placeholder image"
+                    src={Profilepic}
+                    alt="Cheers"
                     className="mt-4 mb-2 img-thumbnail"
                     fluid
                     style={{ width: "150px", zIndex: "1" }}
                   />
-                  <MDBBtn
-                    outline
-                    color="light"
-                    style={{ height: "36px", overflow: "visible" }}
-                  >
-                    Edit profile
-                  </MDBBtn>
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
                   <MDBTypography tag="h5">{user.username}</MDBTypography>
@@ -71,22 +65,16 @@ function Profile() {
                 style={{ backgroundColor: "#f8f9fa" }}
               >
                 <div className="d-flex justify-content-end text-center py-1">
-                  <div>
-                    <MDBCardText className="mb-1 h5">{tab.length}</MDBCardText>
-                    <MDBCardText className="small text-muted mb-0">
-                      Previous Tabs
-                    </MDBCardText>
-                  </div>
                   <div className="px-3">
-                    <MDBCardText className="mb-1 h5">
-                      # bars visited
-                    </MDBCardText>
+                    <MDBCardText className="mb-1 h5"># Not Enough</MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Bars Visited
                     </MDBCardText>
                   </div>
                   <div>
-                    <MDBCardText className="mb-1 h5"># Epic Nights</MDBCardText>
+                    <MDBCardText className="mb-1 h5">
+                      # I'll never tell
+                    </MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Epic Nights
                     </MDBCardText>
@@ -96,16 +84,16 @@ function Profile() {
               <MDBCardBody className="text-black p-4">
                 <div className="mb-5">
                   <p className="lead fw-normal mb-1">
-                    {tab.description} at {tab.location}
+                    {tab.description}TYPE OF DRINKING at THIS LOCATION
+                    {tab.location}
                   </p>
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     <MDBCardText className="font-italic mb-1">
-                      {/* `${tab[0].drinks[0].description} for $
-                      {tab[0].drinks[0].price}` */}
+                      DRINK for $AMOUNT
                     </MDBCardText>
                   </div>
                 </div>
-                <div className="d-flex justify-content-between align-items-center mb-4">
+                {/* <div className="d-flex justify-content-between align-items-center mb-4">
                   <MDBCardText className="lead fw-normal mb-0">
                     Recent tabs
                   </MDBCardText>
@@ -166,7 +154,7 @@ function Profile() {
                       </Card.Body>
                     </Card>
                   </MDBCol>
-                </MDBRow>
+                </MDBRow> */}
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
@@ -177,3 +165,5 @@ function Profile() {
 }
 
 export default Profile;
+
+// Photo by <a href="https://unsplash.com/@wilstewart3?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Wil Stewart</a> on <a href="https://unsplash.com/s/photos/cheers?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>

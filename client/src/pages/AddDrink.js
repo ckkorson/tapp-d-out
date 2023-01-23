@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_TAB } from "../utils/mutations";
+import { ADD_DRINK } from "../utils/mutations";
 import Auth from "../utils/auth";
 import {
   MDBBtn,
@@ -10,19 +10,19 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 
-const Newtab = (props) => {
-  const [formState, setFormState] = useState({ description: "", location: "" });
-  const [addTab] = useMutation(ADD_TAB);
+const AddDrink = (props) => {
+  const [formState, setFormState] = useState({ description: "", price: "" });
+  const [addDrink] = useMutation(ADD_DRINK);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addTab({
+    const mutationResponse = await addDrink({
       variables: {
         name: formState.description,
-        username: formState.location,
+        username: formState.price,
       },
     });
-    const token = mutationResponse.data.addTab.token;
+    const token = mutationResponse.data.addDrink.token;
     Auth.login(token);
   };
 
@@ -45,11 +45,13 @@ const Newtab = (props) => {
       <div className="mask gradient-custom-3"></div>
       <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
         <MDBCardBody className="px-5">
-          <h2 className="text-uppercase text-center mb-5">Create a New Tab</h2>
+          <h2 className="text-uppercase text-center mb-5">
+            Add a drink to your tab
+          </h2>
           <form onSubmit={handleFormSubmit}>
             <MDBInput
               wrapperClass="mb-4"
-              label="What kind of drinking are we doing?"
+              label="What kind of drink are we having?"
               size="lg"
               id="form1"
               name="description"
@@ -59,16 +61,16 @@ const Newtab = (props) => {
             />
             <MDBInput
               wrapperClass="mb-4"
-              label="Where are we drinking tonight?"
+              label="How much does it cost?"
               size="lg"
               id="form1"
-              name="location"
-              type="text"
+              name="price"
+              type="Int"
               // value={formState.username}
               onChange={handleChange}
             />
             <MDBBtn href="/me" className="mb-4 w-100 blue-custom-4" size="lg">
-              Create Tab
+              Add Drink
             </MDBBtn>
           </form>
         </MDBCardBody>
@@ -77,4 +79,4 @@ const Newtab = (props) => {
   );
 };
 
-export default Newtab;
+export default AddDrink;

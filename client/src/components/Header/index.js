@@ -11,8 +11,9 @@ function Header({ handlePageChange }) {
         <Container>
           <Navbar.Brand to="/me">Tapp-D-Out</Navbar.Brand>
           <Nav className="me-auto">
-            <Link to="/me">Profile</Link>
-            <Link to="/newtab">Create New Tab</Link>
+            <Nav.Link href="/me">Profile</Nav.Link>
+            <Nav.Link href="/newtab">Create New Tab</Nav.Link>
+            <Nav.Link href="/newdrink">Add Drink</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
