@@ -13,7 +13,7 @@ import {
 } from "mdb-react-ui-kit";
 
 const Createacct = (props) => {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: "", password: "" });
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
@@ -105,7 +105,11 @@ const Createacct = (props) => {
                 label="I agree all statements in Terms of service"
               />
             </div>
-            <MDBBtn className="mb-4 w-100 gradient-custom-4" size="lg">
+            <MDBBtn
+              href="/me"
+              className="mb-4 w-100 gradient-custom-4"
+              size="lg"
+            >
               Register
             </MDBBtn>
           </form>
@@ -113,6 +117,6 @@ const Createacct = (props) => {
       </MDBCard>
     </MDBContainer>
   );
-}
+};
 
 export default Createacct;

@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/signup";
 import Newtab from "./pages/Newtab";
+import NewDrink from "./pages/AddDrink";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -52,7 +53,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/me" element={<Profile />} />
-              <Route path="/profiles/:username" element={<Profile />} />
+              <Route path="/newdrink" element={<NewDrink />} />
               <Route path="/newtab" element={<Newtab />} />
             </Routes>
           </div>

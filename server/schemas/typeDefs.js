@@ -33,7 +33,7 @@ const typeDefs = gql`
   type Query {
     user(username: String!): User
     me: User
-    tabs(username:String): [Tab]
+    tabs(username: String): [Tab]
   }
 
   type Mutation {
@@ -44,7 +44,7 @@ const typeDefs = gql`
       password: String!
     ): Auth
 
-    addComment(tabId: ID!, description: String!, price: Int): Tab
+    addDrink(tabId: ID!, description: String!, price: Int): Tab
 
     addTab(description: String!, location: String!): Tab
 
