@@ -3,7 +3,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
-import { QUERY_ME } from "../utils/queries";
+import { QUERY_ME, QUERY_SINGLE_TAB, QUERY_TABS } from "../utils/queries";
 import Auth from "../utils/auth";
 import {
   MDBCol,
@@ -20,8 +20,9 @@ import Card from "react-bootstrap/Card";
 
 function Profile() {
   // const { username: userParam } = useParams();
-  const { data } = useQuery(QUERY_ME);
+  const { data } = useQuery(QUERY_ME, QUERY_SINGLE_TAB);
   const user = data?.me || data?.user || {};
+  const tab = data?.tab || {};
   console.log(user);
 
   // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
@@ -71,7 +72,7 @@ function Profile() {
               >
                 <div className="d-flex justify-content-end text-center py-1">
                   <div>
-                    <MDBCardText className="mb-1 h5"># total tabs</MDBCardText>
+                    <MDBCardText className="mb-1 h5">{tab.length}</MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Previous Tabs
                     </MDBCardText>
@@ -95,17 +96,12 @@ function Profile() {
               <MDBCardBody className="text-black p-4">
                 <div className="mb-5">
                   <p className="lead fw-normal mb-1">
-                    Top 3 Favorite Adult Beverages
+                    {tab.description} at {tab.location}
                   </p>
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     <MDBCardText className="font-italic mb-1">
-                      Blantons
-                    </MDBCardText>
-                    <MDBCardText className="font-italic mb-1">
-                      Coors Light
-                    </MDBCardText>
-                    <MDBCardText className="font-italic mb-0">
-                      Whiskey Sour
+                      {/* `${tab[0].drinks[0].description} for $
+                      {tab[0].drinks[0].price}` */}
                     </MDBCardText>
                   </div>
                 </div>
