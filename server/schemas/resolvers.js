@@ -13,6 +13,10 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    tabs: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Tab.find(params).sort({ createdAt: -1 });
+    },
     // drink: async (parent, { id }, context) => {
     //   if (context.drink){
     //     const drink = await Drink.findById(context.drink.id)
@@ -47,26 +51,43 @@ const resolvers = {
 
       return { token, user };
     },
-    addDrink: async (
-      parent,
-      { drinkName, description, price, category, tabId }
-    ) => {
-      const drink = await Drink.create({
-        drinkName,
-        description,
-        price,
-        category,
-      });
-
-      await Tab.findByIdAndUpdate(
-        { _id: tabId },
-        {
-          $push: { drinks: drink._id },
-        }
-      );
-
-      return drink;
+    addDrink: async (parent, { tabId, description, price }, context) => {
+      if (context.user) {
+        return Tab.findOneAndUpdate(
+          { _id: tabId },
+          {
+            $addToSet: {
+              drinks: { description, price },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
+    // addDrink: async (
+    //   parent,
+    //   { drinkName, description, price, category, tabId }
+    // ) => {
+    //   const drink = await Drink.create({
+    //     drinkName,
+    //     description,
+    //     price,
+    //     category,
+    //   });
+
+    //   await Tab.findByIdAndUpdate(
+    //     { _id: tabId },
+    //     {
+    //       $push: { drinks: drink._id },
+    //     }
+    //   );
+
+    //   return drink;
+    // },
     // addTab: async (parent, { products }, context) => {
     //   console.log(context);
     //   if (context.user) {
@@ -107,14 +128,19 @@ const resolvers = {
 
       return { token, user };
     },
-    addTab: async (parent, { drinks }, context) => {
+    addTab: async (parent, { description, location }, context) => {
       console.log(context);
       if (context.user) {
-        const tab = Tab.create({ drinks });
-
-        await User.findByIdAndUpdate(context.user.id, {
-          $push: { tabs: tab._id },
+        const tab = await Tab.create({
+          description,
+          location,
+          tabOwner: context.user.username,
         });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { tabs: tab._id } }
+        );
 
         return tab;
       }

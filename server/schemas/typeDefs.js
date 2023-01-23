@@ -6,11 +6,13 @@ const typeDefs = gql`
     name: String!
     username: String!
     email: String!
+    tabs: [Tab]!
   }
 
   type Tab {
     _id: ID!
     description: String
+    tabOwner: String
     location: String
     createdAt: String
     drinks: [Drink]
@@ -42,15 +44,9 @@ const typeDefs = gql`
       password: String!
     ): Auth
 
-    addDrink(
-      drinkName: String!
-      description: String
-      price: Int!
-      category: String
-      tabId: ID
-    ): Drink
+    addComment(tabId: ID!, description: String!, price: Int): Tab
 
-    addTab(drinks: [ID]!): Tab
+    addTab(description: String!, location: String!): Tab
 
     updateUser(
       name: String
