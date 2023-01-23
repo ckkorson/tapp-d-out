@@ -10,6 +10,11 @@ const tabSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
+  tabOwner: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   location: {
     type: String,
     required: true,
