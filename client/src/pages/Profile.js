@@ -24,7 +24,7 @@ function Profile() {
   const { tabData } = useQuery(QUERY_SINGLE_TAB);
   const { allTabs } = useQuery(QUERY_TABS);
   console.log(allTabs);
-  const user = data?.me || data?.user || {};
+  const user = data?.me || {};
   const tab = tabData?.tab || {};
   const tabs = allTabs?.tabs || [];
   console.log(user);
