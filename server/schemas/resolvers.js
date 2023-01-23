@@ -23,6 +23,16 @@ const resolvers = {
         return tabs;
       }
     },
+    tab: async (parent, args, context) => {
+      if (context.user) {
+        const tab = await Tab.findOne({ tabOwner: context.user.username }).sort({
+          createdAt: -1,
+        });
+        console.log("THIS IS THE ONE TAB");
+        console.log(tab);
+        return tab;
+      }
+    },
     // drink: async (parent, { id }, context) => {
     //   if (context.drink){
     //     const drink = await Drink.findById(context.drink.id)
@@ -51,10 +61,11 @@ const resolvers = {
     // },
   },
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+    addUser: async (parent, {name, username, email, password}) => {
+      const user = await User.create({name, username, email, password});
       const token = signToken(user);
-
+      console.log('NEW USER');
+      console.log(user)
       return { token, user };
     },
     addDrink: async (parent, { tabId, description, price }, context) => {

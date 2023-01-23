@@ -22,7 +22,7 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_TABS = gql`
-  query getTabs {
+  query tabs {
     tabs {
       _id
       description
@@ -34,8 +34,8 @@ export const QUERY_TABS = gql`
 `;
 
 export const QUERY_SINGLE_TAB = gql`
-  query getSingleTab($tabId: ID!) {
-    tab(tabId: $tabId) {
+  query tab {
+    tab {
       _id
       description
       location

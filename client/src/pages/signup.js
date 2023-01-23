@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 import {
@@ -12,23 +12,14 @@ import {
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 
-const Createacct = (props) => {
-  const [formState, setFormState] = useState({ email: "", password: "" });
-  const [addUser] = useMutation(ADD_USER);
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
-        name: formState.name,
-        username: formState.username,
-        email: formState.email,
-        password: formState.password,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
-  };
+const Createacct = () => {
+  const [formState, setFormState] = useState({
+    name: '',
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -37,6 +28,22 @@ const Createacct = (props) => {
       [name]: value,
     });
   };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+
+    try {
+      const { data } = await addUser({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <MDBContainer
       fluid
@@ -58,7 +65,7 @@ const Createacct = (props) => {
               id="form1"
               name="name"
               type="text"
-              // value={formState.name}
+              value={formState.name}
               onChange={handleChange}
             />
             <MDBInput
@@ -68,7 +75,7 @@ const Createacct = (props) => {
               id="form1"
               name="username"
               type="text"
-              // value={formState.username}
+              value={formState.username}
               onChange={handleChange}
             />
             <MDBInput
@@ -78,7 +85,7 @@ const Createacct = (props) => {
               id="form2"
               name="email"
               type="email"
-              // value={formState.email}
+              value={formState.email}
               onChange={handleChange}
             />
             <MDBInput
@@ -88,7 +95,7 @@ const Createacct = (props) => {
               id="form3"
               name="password"
               type="password"
-              // value={formState.username}
+              value={formState.password}
               onChange={handleChange}
             />
             <MDBInput
@@ -106,7 +113,8 @@ const Createacct = (props) => {
               />
             </div>
             <MDBBtn
-              href="/me"
+              type='submit'
+              // href="/me"
               className="mb-4 w-100 gradient-custom-4"
               size="lg"
             >
