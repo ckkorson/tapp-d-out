@@ -1,0 +1,11 @@
+[
+  {
+    "description": "Just some light drinking",
+    "location": "Broadway",
+    "drinks": {
+      "description": "Beer",
+      "price": 5
+    }
+  }
+  
+]

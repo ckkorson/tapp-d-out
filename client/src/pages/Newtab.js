@@ -16,14 +16,15 @@ const Newtab = (props) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addTab({
+    console.log(formState);
+    const { data } = await addTab({
       variables: {
-        name: formState.description,
-        username: formState.location,
+        ...formState,
       },
     });
-    const token = mutationResponse.data.addTab.token;
-    Auth.login(token);
+    console.log(data);
+    // const token = data.addTab.token;
+    // Auth.login(token);
   };
 
   const handleChange = (event) => {
@@ -67,7 +68,11 @@ const Newtab = (props) => {
               // value={formState.username}
               onChange={handleChange}
             />
-            <MDBBtn href="/me" className="mb-4 w-100 blue-custom-4" size="lg">
+            <MDBBtn
+              type="submit"
+              className="mb-4 w-100 blue-custom-4"
+              size="lg"
+            >
               Create Tab
             </MDBBtn>
           </form>
