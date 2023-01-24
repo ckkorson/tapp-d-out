@@ -24,13 +24,12 @@ const AddDrink = (props) => {
     console.log(formState);
     const data = await addDrink({
       variables: {
-        // drinkType: formState.drinkType,
-        // price: formState.price,
-        ...formState,
+        drinkType: formState.drinkType,
+        price: formState.price,
         tabId: tabs[0]._id
       },
     });
-    console.log(data);
+    await console.log(data);
   };
 
   const handleChange = (event) => {
