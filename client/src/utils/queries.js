@@ -29,6 +29,12 @@ export const QUERY_TABS = gql`
       tabOwner
       location
       createdAt
+      drinks {
+        _id
+        drinkType
+        price
+        createdAt
+      }
     }
   }
 `;
