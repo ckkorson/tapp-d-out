@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_DRINK } from "../utils/mutations";
 import { useQuery } from "@apollo/client";
-import { QUERY_SINGLE_TAB } from "../utils/queries";
+import { QUERY_TABS } from "../utils/queries";
 import Auth from "../utils/auth";
 import {
   MDBBtn,
@@ -15,13 +15,19 @@ import {
 const AddDrink = (props) => {
   const [formState, setFormState] = useState({ drinkType: "", price: "" });
   const [addDrink] = useMutation(ADD_DRINK);
+  const { loading, data: allTabs } = useQuery(QUERY_TABS);
+  const tabs = allTabs?.tabs || [];
+  console.log(tabs)
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
-    const { data } = await addDrink({
+    const data = await addDrink({
       variables: {
+        // drinkType: formState.drinkType,
+        // price: formState.price,
         ...formState,
+        tabId: tabs[0]._id
       },
     });
     console.log(data);
@@ -34,6 +40,11 @@ const AddDrink = (props) => {
       [name]: value,
     });
   };
+
+  if (loading) {
+    return;
+    <div>Loading</div>;
+  }
   return (
     <MDBContainer
       fluid

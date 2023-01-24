@@ -53,19 +53,19 @@ export const ADD_TAB = gql`
 `;
 
 export const ADD_DRINK = gql`
-  mutation addDrink($tabId: ID!, $drinkType: String!, $price: Int) {
-    addDrink(tabId:$tabId, drinkType: $drinkType, price: $price) {
+mutation addDrink($tabId: ID!, $drinkType: String!, $price: Int) {
+  addDrink(tabId: $tabId, drinkType: $drinkType, price: $price) {
+    _id
+    createdAt
+    description
+    location
+    tabOwner
+    drinks {
       _id
-      description
-      location
-      tabOwner
       createdAt
-      drinks {
-        _id
-        drinkType
-        price
-        createdAt
-      }
+      drinkType
+      price
     }
   }
+}
 `;

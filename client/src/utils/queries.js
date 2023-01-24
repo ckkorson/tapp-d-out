@@ -32,12 +32,6 @@ query tabs {
     drinks {
       _id
       createdAt
-      drinks {
-        _id
-        drinkType
-        price
-        createdAt
-      }
     }
   }
 }
