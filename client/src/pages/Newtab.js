@@ -67,6 +67,7 @@ const Newtab = (props) => {
               onChange={handleChange}
             />
             <MDBBtn
+              to="/me"
               type="submit"
               className="mb-4 w-100 blue-custom-4"
               size="lg"

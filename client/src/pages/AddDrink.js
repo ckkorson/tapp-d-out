@@ -11,7 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 
 const AddDrink = (props) => {
-  const [formState, setFormState] = useState({ description: "", price: "" });
+  const [formState, setFormState] = useState({ drinkType: "", price: "" });
   const [addDrink] = useMutation(ADD_DRINK);
 
   const handleFormSubmit = async (event) => {
@@ -53,7 +53,7 @@ const AddDrink = (props) => {
               label="What kind of drink are we having?"
               size="lg"
               id="form1"
-              name="description"
+              name="drinkType"
               type="text"
               // value={formState.name}
               onChange={handleChange}
