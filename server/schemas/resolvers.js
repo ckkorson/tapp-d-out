@@ -35,32 +35,6 @@ const resolvers = {
         return tab;
       }
     },
-    // drink: async (parent, { id }, context) => {
-    //   if (context.drink){
-    //     const drink = await Drink.findById(context.drink.id)
-
-    //     return drink
-    //   }
-    //   throw new AuthenticationError('Drink does not exist')
-    // }
-    // drink: async (parent, { _id }) => {
-    //   const drink = await Drink.findById(_id);
-    //   if (drink) {
-    //     return drink;
-    //   }
-    //   throw new AuthenticationError("Drink does not exist");
-    // },
-    // drinks: async (parent, { drinkName }) => {
-    //   const params = {};
-
-    //   if (drinkName) {
-    //     params.drinkName = {
-    //       $regex: drinkName,
-    //     };
-    //   }
-
-    //   return Drink.find(params).populate("drinkName");
-    // },
   },
   Mutation: {
     addUser: async (parent, { name, username, email, password }) => {
@@ -72,55 +46,19 @@ const resolvers = {
     },
     addDrink: async (parent, { tabId, drinkType, price }, context) => {
       // if (context.user) {
-        return Tab.findOneAndUpdate(
-          { _id: tabId },
-          {
-            $addToSet: {
-              drinks: { drinkType, price },
-            },
+      return Tab.findOneAndUpdate(
+        { _id: tabId },
+        {
+          $addToSet: {
+            drinks: { drinkType, price },
           },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-      // }
-      // throw new AuthenticationError("You need to be logged in!");
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
     },
-    // addDrink: async (
-    //   parent,
-    //   { drinkName, description, price, category, tabId }
-    // ) => {
-    //   const drink = await Drink.create({
-    //     drinkName,
-    //     description,
-    //     price,
-    //     category,
-    //   });
-
-    //   await Tab.findByIdAndUpdate(
-    //     { _id: tabId },
-    //     {
-    //       $push: { drinks: drink._id },
-    //     }
-    //   );
-
-    //   return drink;
-    // },
-    // addTab: async (parent, { products }, context) => {
-    //   console.log(context);
-    //   if (context.user) {
-    //     const order = new Tab({ products });
-
-    //     await User.findByIdAndUpdate(context.user.id, {
-    //       $push: { orders: order },
-    //     });
-
-    //     return order;
-    //   }
-
-    //   throw new AuthenticationError("Not logged in");
-    // },
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return User.findByIdAndUpdate(context.user.id, args, {

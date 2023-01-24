@@ -6,6 +6,8 @@ const tabSeeds = require("./tabSeeds.json");
 db.once("open", async () => {
   await User.deleteMany({});
   await User.create(userSeeds);
+
+  // FUTURE DEVELOPMENT
   // await Tab.deleteMany({});
   // await Tab.create(tabSeeds);
 
