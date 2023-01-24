@@ -45,7 +45,7 @@ const typeDefs = gql`
       password: String!
     ): Auth
 
-    addDrink(tabId: ID!, description: String!, price: Int): Tab
+    addDrink(tabId: ID!, drinkType: String!, price: Int): Tab
 
     addTab(description: String!, location: String!): Tab
 

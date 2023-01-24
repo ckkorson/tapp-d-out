@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_DRINK } from "../utils/mutations";
+import { useQuery } from "@apollo/client";
+import { QUERY_SINGLE_TAB } from "../utils/queries";
 import Auth from "../utils/auth";
 import {
   MDBBtn,

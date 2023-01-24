@@ -54,7 +54,7 @@ export const ADD_TAB = gql`
 
 export const ADD_DRINK = gql`
   mutation addDrink($tabId: ID!, $drinkType: String!, $price: Int) {
-    addDrink(tabId: $tabId, drinkType: $drinkType, price: $price) {
+    addDrink(tabId:$tabId, drinkType: $drinkType, price: $price) {
       _id
       description
       location
