@@ -17,12 +17,17 @@ const Profilepic = require("../resources/images/profile.jpg");
 function Profile() {
   const { data } = useQuery(QUERY_ME);
   const { data: allTabs } = useQuery(QUERY_TABS);
-  console.log(allTabs);
   const user = data?.me || {};
   const tabs = allTabs?.tabs || [];
-  console.log(user);
-  console.log(tabs);
   const drinks = tabs[0]?.drinks || [];
+  const TabTotal = (drinks) => {
+    let total = 0;
+    for(let i = 0; i < drinks.length; i++) {
+        total = total + parseInt(drinks[i].price)
+    }
+    return total
+  }
+  const totaller = TabTotal(drinks);
 
   if (tabs.length === 0) {
     return (
@@ -48,8 +53,8 @@ function Profile() {
                     />
                   </div>
                   <div className="ms-3" style={{ marginTop: "130px" }}>
-                    <MDBTypography tag="h5">{user.username}</MDBTypography>
-                    <MDBCardText>{user.email}</MDBCardText>
+                    <MDBTypography tag="h5">{user.name}</MDBTypography>
+                    <MDBCardText>{user.username}</MDBCardText>
                   </div>
                 </div>
                 <div
@@ -112,8 +117,8 @@ function Profile() {
                   />
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
-                  <MDBTypography tag="h5">{user.username}</MDBTypography>
-                  <MDBCardText>{user.email}</MDBCardText>
+                  <MDBTypography tag="h5">{user.name}</MDBTypography>
+                  <MDBCardText>{user.username}</MDBCardText>
                 </div>
               </div>
               <div
@@ -155,7 +160,7 @@ function Profile() {
                     <br></br>
                     <div>
                       <MDBCardText className="mb-1 h5">
-                        ${tabs.length}
+                        ${totaller}
                       </MDBCardText>
                       <MDBCardText className="small text-muted mb-0">
                         How much have I spent tonight?

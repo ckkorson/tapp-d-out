@@ -18,8 +18,8 @@ const resolvers = {
         const tabs = await Tab.find({ tabOwner: context.user.username }).sort({
           createdAt: -1,
         });
-        console.log("THESE ARE THE TABS");
-        console.log(tabs);
+        // console.log("THESE ARE THE TABS");
+        // console.log(tabs);
         return tabs;
       }
     },
@@ -30,8 +30,8 @@ const resolvers = {
             createdAt: -1,
           }
         );
-        console.log("THIS IS THE ONE TAB");
-        console.log(tab);
+        // console.log("THIS IS THE ONE TAB");
+        // console.log(tab);
         return tab;
       }
     },

@@ -16,7 +16,6 @@ const AddDrink = (props) => {
   const [addDrink] = useMutation(ADD_DRINK);
   const { loading, data: allTabs } = useQuery(QUERY_TABS);
   const tabs = allTabs?.tabs || [];
-  console.log(tabs);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
