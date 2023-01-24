@@ -3,7 +3,6 @@ import { useMutation } from "@apollo/client";
 import { ADD_DRINK } from "../utils/mutations";
 import { useQuery } from "@apollo/client";
 import { QUERY_TABS } from "../utils/queries";
-import Auth from "../utils/auth";
 import {
   MDBBtn,
   MDBContainer,
@@ -30,6 +29,7 @@ const AddDrink = (props) => {
       },
     });
     await console.log(data);
+    window.location.assign("/me");
   };
 
   const handleChange = (event) => {

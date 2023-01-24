@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_TAB } from "../utils/mutations";
-import Auth from "../utils/auth";
 import {
   MDBBtn,
   MDBContainer,
@@ -22,6 +21,7 @@ const Newtab = (props) => {
         ...formState,
       },
     });
+    window.location.assign("/me");
     console.log(data);
   };
 
