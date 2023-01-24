@@ -152,6 +152,15 @@ function Profile() {
                           {drink.drinkType} for ${drink.price}
                         </MDBCardText>
                       ))}
+                    <br></br>
+                    <div>
+                      <MDBCardText className="mb-1 h5">
+                        ${tabs.length}
+                      </MDBCardText>
+                      <MDBCardText className="small text-muted mb-0">
+                        How much have I spent tonight?
+                      </MDBCardText>
+                    </div>
                   </div>
                 </div>
               </MDBCardBody>
