@@ -53,7 +53,7 @@ export const ADD_TAB = gql`
 `;
 
 export const ADD_DRINK = gql`
-mutation addDrink($tabId: ID!, $drinkType: String!, $price: Int) {
+mutation addDrink($tabId: String!, $drinkType: String!, $price: String) {
   addDrink(tabId: $tabId, drinkType: $drinkType, price: $price) {
     _id
     createdAt
