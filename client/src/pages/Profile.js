@@ -21,8 +21,8 @@ const Profilepic = require("../resources/images/profile.jpg");
 function Profile() {
   // const { username: userParam } = useParams();
   const { data } = useQuery(QUERY_ME);
-  const { tabData } = useQuery(QUERY_SINGLE_TAB);
-  const { allTabs } = useQuery(QUERY_TABS);
+  const { data: tabData } = useQuery(QUERY_SINGLE_TAB);
+  const { data: allTabs } = useQuery(QUERY_TABS);
   console.log(allTabs);
   const user = data?.me || {};
   const tab = tabData?.tab || {};
@@ -89,8 +89,7 @@ function Profile() {
               <MDBCardBody className="text-black p-4">
                 <div className="mb-5">
                   <p className="lead fw-normal mb-1">
-                    {tab.description} at
-                    {tab.location}
+                    {tab[0].description} at {tab[0].location}
                   </p>
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     <MDBCardText className="font-italic mb-1">

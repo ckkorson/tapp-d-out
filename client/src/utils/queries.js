@@ -22,15 +22,21 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_TABS = gql`
-  query tabs {
-    tabs {
+query tabs {
+  tabs {
+    _id
+    createdAt
+    description
+    location
+    tabOwner
+    drinks {
       _id
-      description
-      tabOwner
-      location
       createdAt
+      drinkType
+      price
     }
   }
+}
 `;
 
 export const QUERY_SINGLE_TAB = gql`

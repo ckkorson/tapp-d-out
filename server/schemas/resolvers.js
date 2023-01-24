@@ -71,7 +71,7 @@ const resolvers = {
       return { token, user };
     },
     addDrink: async (parent, { tabId, drinkType, price }, context) => {
-      if (context.user) {
+      // if (context.user) {
         return Tab.findOneAndUpdate(
           { _id: tabId },
           {
@@ -84,8 +84,8 @@ const resolvers = {
             runValidators: true,
           }
         );
-      }
-      throw new AuthenticationError("You need to be logged in!");
+      // }
+      // throw new AuthenticationError("You need to be logged in!");
     },
     // addDrink: async (
     //   parent,
