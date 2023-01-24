@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-// import { Link } from "react-router-dom";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 import {
@@ -14,10 +13,10 @@ import {
 
 const Createacct = () => {
   const [formState, setFormState] = useState({
-    name: '',
-    username: '',
-    email: '',
-    password: '',
+    name: "",
+    username: "",
+    email: "",
+    password: "",
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
@@ -113,7 +112,7 @@ const Createacct = () => {
               />
             </div>
             <MDBBtn
-              type='submit'
+              type="submit"
               // href="/me"
               className="mb-4 w-100 gradient-custom-4"
               size="lg"

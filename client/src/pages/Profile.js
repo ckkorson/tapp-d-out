@@ -1,10 +1,7 @@
 import React from "react";
-import { Navigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
 import { QUERY_ME, QUERY_TABS } from "../utils/queries";
-import Auth from "../utils/auth";
 import {
   MDBCol,
   MDBContainer,
@@ -13,28 +10,19 @@ import {
   MDBCardText,
   MDBCardBody,
   MDBCardImage,
-  MDBBtn,
   MDBTypography,
 } from "mdb-react-ui-kit";
 const Profilepic = require("../resources/images/profile.jpg");
 
 function Profile() {
-  // const { username: userParam } = useParams();
   const { data } = useQuery(QUERY_ME);
-  // const { tabData } = useQuery(QUERY_SINGLE_TAB);
   const { loading, data: allTabs } = useQuery(QUERY_TABS);
   console.log(allTabs);
   const user = data?.me || {};
-  // const tab = tabData?.tab || {};
   const tabs = allTabs?.tabs || [];
   console.log(user);
-  // console.log(tabData);
   console.log(tabs);
   const drinks = tabs[0]?.drinks || [];
-
-  // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-  //   return <Navigate to="/me" />;
-  // }
 
   if (loading) {
     return;
@@ -96,7 +84,10 @@ function Profile() {
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     {drinks &&
                       drinks.map((drink) => (
-                        <MDBCardText className="font-italic mb-1">
+                        <MDBCardText
+                          key={drink._id}
+                          className="font-italic mb-1"
+                        >
                           {drink.drinkType} for ${drink.price}
                         </MDBCardText>
                       ))}
