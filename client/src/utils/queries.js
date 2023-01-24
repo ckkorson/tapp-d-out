@@ -42,7 +42,7 @@ export const QUERY_SINGLE_TAB = gql`
       createdAt
       drinks {
         _id
-        description
+        drinkType
         price
         createdAt
       }

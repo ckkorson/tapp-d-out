@@ -25,9 +25,11 @@ const resolvers = {
     },
     tab: async (parent, args, context) => {
       if (context.user) {
-        const tab = await Tab.findOne({ tabOwner: context.user.username }).sort({
-          createdAt: -1,
-        });
+        const tab = await Tab.findOne({ tabOwner: context.user.username }).sort(
+          {
+            createdAt: -1,
+          }
+        );
         console.log("THIS IS THE ONE TAB");
         console.log(tab);
         return tab;
@@ -61,20 +63,20 @@ const resolvers = {
     // },
   },
   Mutation: {
-    addUser: async (parent, {name, username, email, password}) => {
-      const user = await User.create({name, username, email, password});
+    addUser: async (parent, { name, username, email, password }) => {
+      const user = await User.create({ name, username, email, password });
       const token = signToken(user);
-      console.log('NEW USER');
-      console.log(user)
+      console.log("NEW USER");
+      console.log(user);
       return { token, user };
     },
-    addDrink: async (parent, { tabId, description, price }, context) => {
+    addDrink: async (parent, { tabId, drinkType, price }, context) => {
       if (context.user) {
         return Tab.findOneAndUpdate(
           { _id: tabId },
           {
             $addToSet: {
-              drinks: { description, price },
+              drinks: { drinkType, price },
             },
           },
           {
