@@ -73,17 +73,17 @@ function Profile() {
               >
                 <div className="d-flex justify-content-end text-center py-1">
                   <div className="px-3">
-                    <MDBCardText className="mb-1 h5"># Not Enough</MDBCardText>
+                    <MDBCardText className="mb-1 h5">
+                      {drinks.length}
+                    </MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
-                      Bars Visited
+                      # How many have I had tonight
                     </MDBCardText>
                   </div>
                   <div>
-                    <MDBCardText className="mb-1 h5">
-                      # I'll never tell
-                    </MDBCardText>
+                    <MDBCardText className="mb-1 h5">{tabs.length}</MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
-                      Epic Nights
+                      # of Epic Nights with Tapp-D-Out
                     </MDBCardText>
                   </div>
                 </div>
