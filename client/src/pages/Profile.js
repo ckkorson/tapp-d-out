@@ -30,6 +30,7 @@ function Profile() {
   console.log(user);
   // console.log(tabData);
   console.log(tabs);
+  const drinks = tabs[0]?.drinks || [];
 
   // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
   //   return <Navigate to="/me" />;
@@ -93,10 +94,12 @@ function Profile() {
                     {tabs[0].description} at {tabs[0].location}
                   </p>
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
-                    <MDBCardText className="font-italic mb-1">
-                      {/* {tab[0].drinks[0].description[0]} */}for
-                      {/* {tab[0].drinks[0].price[0]} */}
-                    </MDBCardText>
+                    {drinks &&
+                      drinks.map((drink) => (
+                        <MDBCardText className="font-italic mb-1">
+                          {drink.drinkType} for ${drink.price}
+                        </MDBCardText>
+                      ))}
                   </div>
                 </div>
                 {/* <div className="d-flex justify-content-between align-items-center mb-4">

@@ -17,7 +17,7 @@ const AddDrink = (props) => {
   const [addDrink] = useMutation(ADD_DRINK);
   const { loading, data: allTabs } = useQuery(QUERY_TABS);
   const tabs = allTabs?.tabs || [];
-  console.log(tabs)
+  console.log(tabs);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -26,7 +26,7 @@ const AddDrink = (props) => {
       variables: {
         drinkType: formState.drinkType,
         price: formState.price,
-        tabId: tabs[0]._id
+        tabId: tabs[0]._id,
       },
     });
     await console.log(data);
@@ -76,7 +76,7 @@ const AddDrink = (props) => {
               size="lg"
               id="form1"
               name="price"
-              type="Int"
+              type="text"
               // value={formState.username}
               onChange={handleChange}
             />

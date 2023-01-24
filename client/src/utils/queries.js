@@ -22,19 +22,21 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_TABS = gql`
-query tabs {
-  tabs {
-    _id
-    createdAt
-    description
-    location
-    tabOwner
-    drinks {
+  query tabs {
+    tabs {
       _id
       createdAt
+      description
+      location
+      tabOwner
+      drinks {
+        _id
+        drinkType
+        price
+        createdAt
+      }
     }
   }
-}
 `;
 
 export const QUERY_SINGLE_TAB = gql`
