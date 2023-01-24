@@ -35,11 +35,11 @@ npm run start:dev
 ##
 ![Signup page](./img/signup.png)
 ##
-<!-- ![]()
+![new Tab](./img/newtab.png)
 ##
-![]()
+![new Drink](./img/newdrink.png)
 ##
-![]() -->
+![Profile](./img/me.png) 
 
 ## Contributers
 
