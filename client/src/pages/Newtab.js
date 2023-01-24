@@ -21,7 +21,7 @@ const Newtab = (props) => {
         ...formState,
       },
     });
-    window.location.assign("/me");
+    window.location.assign("/newdrink");
     console.log(data);
   };
 
