@@ -20,7 +20,7 @@ const typeDefs = gql`
 
   type Drink {
     _id: ID
-    description: String
+    drinkType: String
     price: Int
     createdAt: String
   }

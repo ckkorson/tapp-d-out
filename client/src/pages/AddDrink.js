@@ -16,14 +16,13 @@ const AddDrink = (props) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addDrink({
+    console.log(formState);
+    const { data } = await addDrink({
       variables: {
-        name: formState.description,
-        username: formState.price,
+        ...formState,
       },
     });
-    const token = mutationResponse.data.addDrink.token;
-    Auth.login(token);
+    console.log(data);
   };
 
   const handleChange = (event) => {
@@ -69,7 +68,11 @@ const AddDrink = (props) => {
               // value={formState.username}
               onChange={handleChange}
             />
-            <MDBBtn href="/me" className="mb-4 w-100 blue-custom-4" size="lg">
+            <MDBBtn
+              type="submit"
+              className="mb-4 w-100 blue-custom-4"
+              size="lg"
+            >
               Add Drink
             </MDBBtn>
           </form>

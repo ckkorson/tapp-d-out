@@ -23,8 +23,6 @@ const Newtab = (props) => {
       },
     });
     console.log(data);
-    // const token = data.addTab.token;
-    // Auth.login(token);
   };
 
   const handleChange = (event) => {

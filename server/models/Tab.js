@@ -1,5 +1,5 @@
 // const mongoose = require("mongoose");
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 
 const tabSchema = new Schema({
@@ -27,13 +27,13 @@ const tabSchema = new Schema({
   },
   drinks: [
     {
-      description: {
+      drinkType: {
         type: String,
         required: true,
         minlength: 1,
         maxlength: 280,
       },
-      Price: {
+      price: {
         type: String,
         required: true,
       },
