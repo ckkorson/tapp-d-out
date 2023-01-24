@@ -3,7 +3,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { useQuery } from "@apollo/client";
-import { QUERY_ME, QUERY_SINGLE_TAB, QUERY_TABS } from "../utils/queries";
+import { QUERY_ME, QUERY_TABS } from "../utils/queries";
 import Auth from "../utils/auth";
 import {
   MDBCol,
@@ -21,11 +21,11 @@ const Profilepic = require("../resources/images/profile.jpg");
 function Profile() {
   // const { username: userParam } = useParams();
   const { data } = useQuery(QUERY_ME);
-  const { tabData } = useQuery(QUERY_SINGLE_TAB);
+  // const { tabData } = useQuery(QUERY_SINGLE_TAB);
   const { loading, data: allTabs } = useQuery(QUERY_TABS);
   console.log(allTabs);
   const user = data?.me || {};
-  const tab = tabData?.tab || {};
+  // const tab = tabData?.tab || {};
   const tabs = allTabs?.tabs || [];
   console.log(user);
   // console.log(tabData);
