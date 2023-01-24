@@ -16,7 +16,7 @@ const Profilepic = require("../resources/images/profile.jpg");
 
 function Profile() {
   const { data } = useQuery(QUERY_ME);
-  const { loading, data: allTabs } = useQuery(QUERY_TABS);
+  const { data: allTabs } = useQuery(QUERY_TABS);
   console.log(allTabs);
   const user = data?.me || {};
   const tabs = allTabs?.tabs || [];
@@ -24,9 +24,70 @@ function Profile() {
   console.log(tabs);
   const drinks = tabs[0]?.drinks || [];
 
-  if (loading) {
-    return;
-    <div>Loading</div>;
+  if (tabs.length === 0) {
+    return (
+      <div className="gradient-custom-2" style={{ backgroundColor: "#999" }}>
+        <MDBContainer className="py-5 h-100">
+          <MDBRow className="justify-content-center align-items-center h-100">
+            <MDBCol lg="9" xl="7">
+              <MDBCard>
+                <div
+                  className="rounded-top text-white d-flex flex-row"
+                  style={{ backgroundColor: "#333", height: "200px" }}
+                >
+                  <div
+                    className="ms-4 mt-5 d-flex flex-column"
+                    style={{ width: "150px" }}
+                  >
+                    <MDBCardImage
+                      src={Profilepic}
+                      alt="Cheers"
+                      className="mt-4 mb-2 img-thumbnail"
+                      fluid
+                      style={{ width: "150px", zIndex: "1" }}
+                    />
+                  </div>
+                  <div className="ms-3" style={{ marginTop: "130px" }}>
+                    <MDBTypography tag="h5">{user.username}</MDBTypography>
+                    <MDBCardText>{user.email}</MDBCardText>
+                  </div>
+                </div>
+                <div
+                  className="p-4 text-black"
+                  style={{ backgroundColor: "#f8f9fa" }}
+                >
+                  <div className="d-flex justify-content-end text-center py-1">
+                    <div className="px-3">
+                      <MDBCardText className="mb-1 h5">
+                        {drinks.length}
+                      </MDBCardText>
+                      <MDBCardText className="small text-muted mb-0">
+                        # How many have I had tonight
+                      </MDBCardText>
+                    </div>
+                    <div>
+                      <MDBCardText className="mb-1 h5">
+                        {tabs.length}
+                      </MDBCardText>
+                      <MDBCardText className="small text-muted mb-0">
+                        # of Epic Nights with Tapp-D-Out
+                      </MDBCardText>
+                    </div>
+                  </div>
+                </div>
+                <MDBCardBody className="text-black p-4">
+                  <div className="mb-5">
+                    <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
+                      <MDBCardText>Let's Start a New Tab</MDBCardText>
+                    </div>
+                  </div>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+      </div>
+    );
   }
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "#999" }}>
