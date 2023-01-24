@@ -21,23 +21,24 @@ const Profilepic = require("../resources/images/profile.jpg");
 function Profile() {
   // const { username: userParam } = useParams();
   const { data } = useQuery(QUERY_ME);
-  const { data: tabData } = useQuery(QUERY_SINGLE_TAB);
-  const { data: allTabs } = useQuery(QUERY_TABS);
+  const { tabData } = useQuery(QUERY_SINGLE_TAB);
+  const { loading, data: allTabs } = useQuery(QUERY_TABS);
   console.log(allTabs);
   const user = data?.me || {};
   const tab = tabData?.tab || {};
   const tabs = allTabs?.tabs || [];
   console.log(user);
-  console.log(tabData);
+  // console.log(tabData);
   console.log(tabs);
 
   // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
   //   return <Navigate to="/me" />;
   // }
 
-  // if (data) {
-  //   user = data.user;
-  // }
+  if (loading) {
+    return;
+    <div>Loading</div>;
+  }
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "#999" }}>
       <MDBContainer className="py-5 h-100">
@@ -89,7 +90,7 @@ function Profile() {
               <MDBCardBody className="text-black p-4">
                 <div className="mb-5">
                   <p className="lead fw-normal mb-1">
-                    {tab[0].description} at {tab[0].location}
+                    {tabs[0].description} at {tabs[0].location}
                   </p>
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     <MDBCardText className="font-italic mb-1">

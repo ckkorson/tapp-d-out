@@ -32,8 +32,12 @@ query tabs {
     drinks {
       _id
       createdAt
-      drinkType
-      price
+      drinks {
+        _id
+        drinkType
+        price
+        createdAt
+      }
     }
   }
 }
